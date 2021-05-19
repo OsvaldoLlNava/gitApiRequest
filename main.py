@@ -11,11 +11,13 @@ def obtener_issues():
     seguir = True
     while (seguir):
         resp = requests.get(
-            'https://api.github.com/repos/golang/go/issues?labels=Go2&page={}'.format(count))
+            'https://api.github.com/repos/golang/go/issues?labels=Go2&page={}&per_page=100'.format(count))
         count += 1
         body = resp.json()
-
-        if resp != []:
+        print(resp)
+        print("----------------------------")
+        print(body)
+        if body != []:
             for problema in body:
                 tags = ""
                 labels = problema["labels"]
