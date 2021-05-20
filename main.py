@@ -29,8 +29,8 @@ def obtener_issues():
                 if problema["milestone"] is not None:
                     milestoneT = problema["milestone"]["title"]
                     milestoneD = problema["milestone"]["description"]
-                database.Agregar_Elemento_Issue(problema["number"], problema["html_url"], problema["title"], problema["user"]
-                                                ["login"], tags, milestoneT, milestoneD)
+                database.Agregar_Elemento_Issue(issue.issue(problema["number"], problema["html_url"], problema["title"], problema["user"]
+                                                ["login"], tags, milestoneT, milestoneD))
         else:
             seguir = False
 
@@ -46,6 +46,6 @@ def obtener_issues():
 
 if __name__ == '__main__':
     database.Crear_Tabla_Issues()
-    # database.Agregar_Elemento()
     obtener_issues()
     database.Ver_Todo()
+    print("fin")

@@ -30,21 +30,21 @@ def Crear_Tabla_Issues():
             conexion.close()
 
 
-def Agregar_Elemento_Issue(numero, url, titulo, autor, labels, milestoneTitle, milestoneDescription):
+def Agregar_Elemento_Issue(issue):
     try:
         conexion = sqlite3.connect('issues.db')
         cursor = conexion.cursor()
         print('Conectado')
 
         query = """INSERT INTO issues VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}')""".format(
-            numero, url, titulo, autor, labels, milestoneTitle, milestoneDescription)
+            issue._numero, issue._url, issue._titulo, issue._autor, issue._labels, issue._milestoneTitle, issue._milestoneDescription)
         resultado = cursor.execute(query)
         conexion.commit()
         print('Valor Insertado Correctamente', resultado)
         cursor.close()
 
     except sqlite3.Error as error:
-        print('Error con la conexion', error, "queso")
+        print('Error con la conexion', error)
 
     finally:
         if(conexion):
