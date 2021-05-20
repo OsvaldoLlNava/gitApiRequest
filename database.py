@@ -3,6 +3,7 @@ import sqlite3
 
 
 def Crear_Tabla_Issues():
+    # intento de creacion de tabla si es que no existe
     try:
         conexion = sqlite3.connect('issues.db')
         cursor = conexion.cursor()
@@ -31,6 +32,7 @@ def Crear_Tabla_Issues():
 
 
 def Agregar_Elemento_Issue(issue):
+    # agregar un elemento a la base de datos
     try:
         conexion = sqlite3.connect('issues.db')
         cursor = conexion.cursor()
@@ -45,27 +47,6 @@ def Agregar_Elemento_Issue(issue):
 
     except sqlite3.Error as error:
         print('Error con la conexion', error)
-
-    finally:
-        if(conexion):
-            conexion.close()
-
-
-def Agregar_Elemento():
-    try:
-        conexion = sqlite3.connect('issues.db')
-        cursor = conexion.cursor()
-        print('Conectado')
-
-        query = """INSERT INTO issues VALUES ('{}', '{}', '{}', '{}', '{}', '{}')""".format(
-            "numero", "url", "titulo", "autor", "labels", "milestoneTitle", "milestoneDescription")
-        resultado = cursor.execute(query)
-        conexion.commit()
-        print('Valor Insertado Correctamente', resultado)
-        cursor.close()
-
-    except sqlite3.Error as error:
-        print('Error con la conexion', error, "queso")
 
     finally:
         if(conexion):

@@ -1,23 +1,19 @@
 import requests
 import database
 import issue
-import pprint
-import json
 
 
 def obtener_issues():
-    count = 1
-    resp = ""
+    count = 1  # inicializacion de contador, este servira para las paginas, no revisar solo los primeros resultados, sino buscar todos en las diferentes paginas de resultados
     seguir = True
-    while (seguir):
+    while (seguir):  # ciclo para poder hacer mas de una peticion, dependiendo cuantas paginas de issues tenga el repo
         resp = requests.get(
             'https://api.github.com/repos/golang/go/issues?labels=Go2&page={}&per_page=100'.format(count))
+        # la peticion se hace con 100 resultados por pagina ya que asi se reducen la cantidad de peticiones por hacer, 100 es el numero maximo de resultados por pagina que permite la API
         count += 1
         body = resp.json()
-        print(resp)
-        print("----------------------------")
-        print(body)
-        if body != []:
+
+        if body != []:  # Esta es una validacion para saber cuando parar, si la respuesta ya no nos entrega informacion entonces es momento de terminar el ciclo
             for problema in body:
                 tags = ""
                 labels = problema["labels"]
@@ -26,6 +22,7 @@ def obtener_issues():
                     tags += ","
                 milestoneT = " "
                 milestoneD = " "
+                # validacion de si milestone no existe ya que algunos resultados de issues no contenian la llave milestone
                 if problema["milestone"] is not None:
                     milestoneT = problema["milestone"]["title"]
                     milestoneD = problema["milestone"]["description"]
@@ -34,18 +31,8 @@ def obtener_issues():
         else:
             seguir = False
 
-#         datos importantes
-# html_url : este es el url que abre el issue para verlo en github
-# title : Nombre del Issue
-# number: Numero del Issue
-# user[login] : Nombre del Autor del Issue
-# labels: Lista de Tags
-# milestone[title] : Nombre del Milestone
-# milestone[description] : Descripcion del Milestone
-
 
 if __name__ == '__main__':
     database.Crear_Tabla_Issues()
     obtener_issues()
     database.Ver_Todo()
-    print("fin")

@@ -1,8 +1,8 @@
 class issue():
-    def __init__(self, url='', titulo='', numero='', autor='', labels=[], milestoneTitle='', milestoneDescription=''):
+    def __init__(self, numero='', url='', titulo='', autor='', labels=[], milestoneTitle='', milestoneDescription=''):
+        self._numero = numero
         self._url = url
         self._titulo = titulo
-        self._numero = numero
         self._autor = autor
         self._labels = labels
         self._milestoneTitle = milestoneTitle
