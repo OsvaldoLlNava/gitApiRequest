@@ -2,6 +2,8 @@ import requests
 import database
 import issue
 
+# uso de la Api de github, documentacion: https://docs.github.com/en/rest
+
 
 def obtener_issues():
     count = 1  # inicializacion de contador, este servira para las paginas, no revisar solo los primeros resultados, sino buscar todos en las diferentes paginas de resultados
@@ -36,3 +38,9 @@ if __name__ == '__main__':
     database.Crear_Tabla_Issues()
     obtener_issues()
     database.Ver_Todo()
+
+
+# pasos a seguir en este codigo:
+# obtener los datos de los issues disponibles en el repositorio  https://github.com/golang/go/
+# guardar esos datos en base de datos
+# visualizar la base de datos con formato especifico
