@@ -11,12 +11,12 @@ def obtener_issues():
     seguir = True
     while (seguir):
         resp = requests.get(
-            'https://api.github.com/repos/golang/go/issues?labels=Go2&page={}&per_page=100'.format(count), headers={"Authorization": "token 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"})
+            'https://api.github.com/repos/golang/go/issues?labels=Go2&page={}&per_page=100'.format(count))
         count += 1
         body = resp.json()
-        # print(resp)
-        # print("----------------------------")
-        # print(body)
+        print(resp)
+        print("----------------------------")
+        print(body)
         if body != []:
             for problema in body:
                 tags = ""
@@ -46,6 +46,6 @@ def obtener_issues():
 
 if __name__ == '__main__':
     database.Crear_Tabla_Issues()
+    # database.Agregar_Elemento()
     obtener_issues()
     database.Ver_Todo()
-    print("fin")

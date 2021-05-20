@@ -30,7 +30,7 @@ def Crear_Tabla_Issues():
             conexion.close()
 
 
-def Agregar_Elemento_Issue(numero, url, titulo, autor, labels=[], milestoneTitle="", milestoneDescription=""):
+def Agregar_Elemento_Issue(numero, url, titulo, autor, labels, milestoneTitle, milestoneDescription):
     try:
         conexion = sqlite3.connect('issues.db')
         cursor = conexion.cursor()
@@ -44,7 +44,7 @@ def Agregar_Elemento_Issue(numero, url, titulo, autor, labels=[], milestoneTitle
         cursor.close()
 
     except sqlite3.Error as error:
-        print('Error con la conexion', error)
+        print('Error con la conexion', error, "queso")
 
     finally:
         if(conexion):
