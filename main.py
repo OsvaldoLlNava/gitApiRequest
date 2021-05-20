@@ -8,10 +8,13 @@ import issue
 def obtener_issues():
     count = 1  # inicializacion de contador, este servira para las paginas, no revisar solo los primeros resultados, sino buscar todos en las diferentes paginas de resultados
     seguir = True
+
     while (seguir):  # ciclo para poder hacer mas de una peticion, dependiendo cuantas paginas de issues tenga el repo
         resp = requests.get(
-            'https://api.github.com/repos/golang/go/issues?labels=Go2&page={}&per_page=100'.format(count))
+            'https://api.github.com/repos/golang/go/issues?labels=Go2&page={}&per_page=100&state=all'.format(count))
+        # los parametros dados son: que se busque que tenga la etiqueta de Go2 (labels=Go2), el numero de pagina a consultar (page={} donde {} va incrementando desde el 1)
         # la peticion se hace con 100 resultados por pagina ya que asi se reducen la cantidad de peticiones por hacer, 100 es el numero maximo de resultados por pagina que permite la API
+        # y pos ultimo el parametro state define en que estado queremos los issues, teniendo "open", "close" y "all", en este caso el problema decia todos asi que se uso "all"
         count += 1
         body = resp.json()
 

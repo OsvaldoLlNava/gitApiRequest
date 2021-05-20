@@ -66,7 +66,7 @@ def Ver_Todo():
 
         print('------------Registros-------------')
 
-        for row in rows:
+        for row in rows:  # En este apartado se pudo realizar para en vez de imprimir creara una lista con estos datos pero se opto por mostrarlo directamente con fines de esta actividad
             print(
                 'Issue #{}\n- URL: {}\n- Nombre: {}\n- Autor: {}\n- Tags: [{}]\n- Milestone\n\t- Nombre: {}\n\t- Descripcion: {}'.format(*row))
             print('-------------------------------')
